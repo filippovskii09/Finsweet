@@ -1,7 +1,4 @@
-@import url(https://fonts.googleapis.com/css2?family=Poppins:wght@400;
 
-500;600&display=swap);
-@charset "UTF-8";
 * {
   padding: 0px;
   margin: 0px;
@@ -26,6 +23,7 @@ body {
   line-height: 1;
   font-family: "Poppins";
   font-size: 1rem;
+  font-weight: 500;
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
