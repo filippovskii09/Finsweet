@@ -105,6 +105,53 @@
     window.addEventListener("keydown", (e => {
         if (e.code === "Escape") closeModal();
     }));
+    const columns = document.querySelectorAll(".expert-column");
+    let currentIndex = 0;
+    function animColumns(index) {
+        columns[index].style.transform = "scale(1.1)";
+        setTimeout((() => {
+            columns[index].style.transform = "scale(1)";
+            currentIndex = (currentIndex + 1) % columns.length;
+            animColumns(currentIndex);
+        }), 1500);
+    }
+    animColumns(currentIndex);
+    let time = 2;
+    let cc = 1;
+    function handleScroll() {
+        const counterElement = document.getElementById("counter");
+        const numberElements = document.querySelectorAll(".number");
+        console.log("counter animation");
+        if (!counterElement) return;
+        const cPos = counterElement.offsetTop;
+        const topWindow = window.scrollY;
+        if (cPos < topWindow + 200) if (cc < 2) numberElements.forEach((element => {
+            const num = parseInt(element.getAttribute("data-num"));
+            const step = 1e3 * time / num;
+            let i = 1;
+            const interval = setInterval((() => {
+                if (i <= num) element.textContent = i; else {
+                    cc += 2;
+                    clearInterval(interval);
+                }
+                i++;
+            }), step);
+        }));
+    }
+    window.addEventListener("scroll", handleScroll);
+    const column = document.querySelector(".services-column");
+    const showMoreButton = document.querySelectorAll(".services-column__btn");
+    const returnFront = document.querySelectorAll("#return-column");
+    showMoreButton.forEach((item => {
+        item.addEventListener("click", (() => {
+            column.classList.add("expanded");
+        }));
+    }));
+    returnFront.forEach((item => {
+        item.addEventListener("click", (() => {
+            column.classList.remove("expanded");
+        }));
+    }));
     window["FLS"] = true;
     isWebp();
     menuInit();
